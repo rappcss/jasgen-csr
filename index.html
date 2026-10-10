@@ -81,6 +81,27 @@
     @media(max-width:760px){.spiral-ring{width:245px;height:245px}.spiral-ink{width:350px;height:350px}.horror-figure{width:145px;height:255px;right:-9px;opacity:.78}.sound-toggle{right:10px;bottom:10px;padding:10px 12px}.sound-hint{display:none}}
     @media(prefers-reduced-motion:reduce){.spiral-ring,.spiral-ring:before,.spiral-ring:after,.spiral-ink{animation:none!important}}
 
+
+    /* DARK / DISTURBING REDESIGN: make the spiral and figure unmistakable on mobile */
+    :root{--bg:#030305;--panel:#0a090d;--panel2:#100b10;--line:#25141b;--red:#ff1744;--red2:#8e001f;--muted:#a09aa4}
+    body:before{background:radial-gradient(ellipse at 52% 25%,rgba(145,0,28,.22),transparent 42%),radial-gradient(ellipse at 100% 58%,rgba(255,0,48,.10),transparent 27%),linear-gradient(180deg,#030305 0%,#090408 47%,#020204 100%)}
+    body:after{opacity:.045;background-size:67px 67px;mask-image:linear-gradient(to bottom,black,transparent 95%)}
+    .hero{position:relative}
+    .hero:before{content:"";position:absolute;left:-16vw;top:5%;width:58vw;height:58vw;max-width:620px;max-height:620px;min-width:340px;min-height:340px;border-radius:50%;pointer-events:none;opacity:.19;background:repeating-radial-gradient(ellipse at 48% 51%,transparent 0 14px,#f0e8ec 15px 17px,transparent 18px 29px,#a90029 30px 32px,transparent 33px 46px);filter:contrast(1.8);animation:disturbingSpin 42s linear infinite;mask-image:radial-gradient(circle,black 25%,transparent 73%)}
+    .hero h1{text-shadow:0 2px 0 #27000b,0 0 24px #ff174426}
+    .hero-visual{min-height:440px}
+    .spiral-scene{opacity:1;mask-image:radial-gradient(ellipse at center,black 50%,transparent 95%)}
+    .spiral-ring{width:440px;height:440px;border:2px solid #eee4e8a8;box-shadow:0 0 28px #ff17443a,inset 0 0 35px #ff17441c;animation:spiralPulse 5s ease-in-out infinite}
+    .spiral-ring:before{inset:26px;border-width:2px;border-color:#f0e8ec9c;border-radius:47% 53% 43% 57%;}
+    .spiral-ring:after{inset:61px;border-width:2px;border-color:#ff1744bd}
+    .spiral-ink{width:560px;height:560px;opacity:.83;filter:drop-shadow(0 0 7px #ff17445c)}
+    .horror-figure{width:245px;height:400px;right:-22px;bottom:-15px;opacity:1;filter:drop-shadow(0 0 18px #ff17445c);}
+    .visual-card{background:linear-gradient(145deg,rgba(10,7,12,.89),rgba(3,3,6,.91) 68%);border-color:#6a172b;box-shadow:0 24px 90px #000,0 0 55px #ff17441c;backdrop-filter:blur(7px)}
+    .corner{background:#e50032;box-shadow:0 0 30px #ff174466}
+    .pricecard,.step,.calcbox{background:linear-gradient(145deg,#0d090e,#070609);border-color:#2a1720}
+    .sound-toggle{border-color:#7e1b32;background:rgba(8,4,8,.94);box-shadow:0 0 22px #ff174421,0 8px 30px #000b}
+    @keyframes disturbingSpin{to{transform:rotate(360deg)}}
+    @media(max-width:760px){.hero:before{left:-40vw;top:3%;width:105vw;height:105vw;opacity:.15}.hero-visual{min-height:405px}.spiral-ring{width:330px;height:330px}.spiral-ink{width:420px;height:420px}.horror-figure{width:190px;height:320px;right:-13px;bottom:-7px;opacity:1}.visual-card{max-width:380px}.hero-visual .corner{right:-2px}}
   </style>
 </head>
 <body>
@@ -152,7 +173,7 @@
     </section>
   </main>
 
-  <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Nyalakan ambience horror"><span class="sound-dot"></span><span id="soundLabel">SOUND OFF</span><span class="sound-hint">· ambience</span></button>
+  <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Nyalakan ambience horror"><span class="sound-dot"></span><span id="soundLabel">HORROR SOUND OFF</span><span class="sound-hint">· ambience</span></button>
 
   <footer class="wrap"><div><div class="footbrand">CSR <span>CARRY</span></div><div>Jasa gendong Clash Squad Ranked Free Fire.</div></div><div class="footright">CS RANKED ONLY · ORDER VIA WHATSAPP<br>© <span id="year"></span> CSR CARRY</div></footer>
 
@@ -238,11 +259,11 @@
       const lfo = audioCtx.createOscillator(); lfo.frequency.value = .09;
       const lfoGain = audioCtx.createGain(); lfoGain.gain.value = 18; lfo.connect(lfoGain); lfoGain.connect(high.frequency); lfo.start();
       ambienceNodes = [master,low,lowGain,high,highGain,lfo,lfoGain]; ambienceOn = true;
-      soundToggle.setAttribute('aria-pressed','true'); soundToggle.setAttribute('aria-label','Matikan ambience horror'); document.getElementById('soundLabel').textContent='SOUND ON';
+      soundToggle.setAttribute('aria-pressed','true'); soundToggle.setAttribute('aria-label','Matikan ambience horror'); document.getElementById('soundLabel').textContent='HORROR SOUND ON';
     }
     function stopAmbience(){
       if(audioCtx && ambienceNodes.length){ const master=ambienceNodes[0]; master.gain.setTargetAtTime(.0001,audioCtx.currentTime,.15); const nodes=ambienceNodes.slice(1); setTimeout(()=>nodes.forEach(n=>{try{n.stop?.();n.disconnect?.()}catch(e){}}),700); ambienceNodes=[]; }
-      ambienceOn=false; soundToggle.setAttribute('aria-pressed','false'); soundToggle.setAttribute('aria-label','Nyalakan ambience horror'); document.getElementById('soundLabel').textContent='SOUND OFF';
+      ambienceOn=false; soundToggle.setAttribute('aria-pressed','false'); soundToggle.setAttribute('aria-label','Nyalakan ambience horror'); document.getElementById('soundLabel').textContent='HORROR SOUND OFF';
     }
     soundToggle.addEventListener('click',()=>{ if(ambienceOn) stopAmbience(); else startAmbience(); });
   </script>
