@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0b0e">
+<title>CSR CARRY — Clash Squad Ranked</title>
+<style>
+:root {
+  --bg:#0b0b0e; --panel:#141419;
+  --red:#f12b40; --text:#f5f5f7; --muted:#aaaab5;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:Arial, sans-serif; line-height:1.6;
+}
+header, section, footer {
+  width:min(100% - 36px, 950px);
+  margin:auto;
+}
+header {
+  padding:24px 0; display:flex;
+  justify-content:space-between; align-items:center;
+}
+.logo { font-weight:900; letter-spacing:1px; }
+.logo span { color:var(--red); }
+.tag { color:var(--muted); font-size:12px; }
+.hero { padding:65px 0 45px; }
+.eyebrow { color:var(--red); font-weight:bold; }
+h1 { font-size:clamp(38px,8vw,68px); line-height:1.05; margin:15px 0; }
+p { color:var(--muted); }
+.btn {
+  display:inline-block; background:var(--red); color:white;
+  padding:13px 20px; border-radius:7px;
+  text-decoration:none; font-weight:bold;
+}
+.btn.secondary {
+  background:transparent; border:1px solid #444;
+  margin-left:8px;
+}
+section { padding:35px 0; }
+h2 { font-size:26px; }
+.cards {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+.card {
+  background:var(--panel); padding:22px;
+  border:1px solid #292930; border-radius:12px;
+}
+.price { color:var(--red); font-size:23px; font-weight:bold; }
+.small { font-size:13px; }
+footer { padding:35px 0; border-top:1px solid #292930; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">CSR <span>CARRY</span></div>
+  <div class="tag">CS RANKED SERVICE</div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">CLASH SQUAD RANKED</div>
+  <h1>YOUR RANK.<br>OUR MISSION.</h1>
+  <p>
+    Butuh teman push rank CSR?
+    Pilih layanan, cek harga, lalu konsultasi langsung
+    lewat WhatsApp.
+  </p>
+  <a class="btn" href="#paket">LIHAT PAKET ↘</a>
+  <a class="btn secondary" href="#order">CARA ORDER</a>
+</section>
+
+<section id="paket">
+  <div class="eyebrow">OUR SERVICES</div>
+  <h2>Pilih layanan lu</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>DUO CARRY</h3>
+      <p>Main bareng untuk membantu push rank.</p>
+      <div class="price">Rp --</div>
+      <p class="small">Harga dikonfirmasi via WhatsApp.</p>
+      <a class="btn" href="#" onclick="order('Duo Carry');return false">PILIH PAKET</a>
+    </div>
+    <div class="card">
+      <h3>SQUAD CARRY</h3>
+      <p>Push rank bersama tim sesuai kesepakatan.</p>
+      <div class="price">Rp --</div>
+      <p class="small">Harga dikonfirmasi via WhatsApp.</p>
+      <a class="btn" href="#" onclick="order('Squad Carry');return false">PILIH PAKET</a>
+    </div>
+    <div class="card">
+      <h3>TARGET RANK</h3>
+      <p>Konsultasikan target dan estimasi match.</p>
+      <div class="price">Custom</div>
+      <p class="small">Cek ketersediaan terlebih dahulu.</p>
+      <a class="btn" href="#" onclick="order('Target Rank');return false">PILIH PAKET</a>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="eyebrow">HOW TO ORDER</div>
+  <h2>Simple. Fast. Clear.</h2>
+  <div class="card">
+    <p>01 — Pilih layanan yang lu mau.</p>
+    <p>02 — Chat admin dan konfirmasi harga.</p>
+    <p>03 — Sepakati jadwal dan metode pembayaran.</p>
+    <p>04 — Mulai setelah detail pesanan dikonfirmasi.</p>
+    <a class="btn" href="#" onclick="order('Konsultasi');return false">
+      CHAT ADMIN ↗
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">FAQ</div>
+  <h2>Frequently Asked Questions</h2>
+  <div class="card">
+    <h3>Gimana cara bayarnya?</h3>
+    <p>Konfirmasi harga dan metode pembayaran langsung dengan admin.</p>
+    <h3>Berapa lama pengerjaannya?</h3>
+    <p>Estimasi disesuaikan dengan target, jadwal, dan kondisi match.</p>
+    <h3>Ada jaminan rank?</h3>
+    <p>Target dan ketentuan harus disepakati sebelum order.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">CSR <span>CARRY</span></div>
+  <p class="small">Clash Squad Ranked service · Order via WhatsApp</p>
+  <p class="small">Gunakan layanan sesuai ketentuan game yang berlaku.</p>
+</footer>
+
+<script>
+const WA_NUMBER = "6285788389825";
+
+function order(service) {
+  if (WA_NUMBER.includes("X")) {
+    alert("Admin belum memasukkan nomor WhatsApp.");
+    return;
+  }
+  const message = "Halo CSR CARRY, saya mau order " + service +
+    ". Boleh info harga dan ketentuannya?";
+  window.open(
+    "https://wa.me/" + WA_NUMBER + "?text=" +
+    encodeURIComponent(message), "_blank"
+  );
+}
+</script>
+</body>
+  </html>
+  
